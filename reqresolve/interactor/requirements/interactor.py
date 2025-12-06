@@ -2,7 +2,7 @@ import os
 
 from reqresolve.interactor.interface import AbstractInteractor
 from reqresolve.interactor.requirements.exception import InvalidSpecifierException, MalformedSpecifiersException
-from reqresolve.package_spec import PackageSpec
+from reqresolve.interactor.spec import PackageSpec
 
 
 class RequirementsInteractor(AbstractInteractor):

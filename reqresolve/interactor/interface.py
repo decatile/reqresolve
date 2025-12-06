@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from reqresolve.package_spec import PackageSpec
+from reqresolve.interactor.spec import PackageSpec
 
 
 class AbstractInteractor(ABC):
