@@ -14,7 +14,7 @@ class PackageSpec:
     extra: str | None
     version: str | None
 
-    def __str__(self):
+    def __str__(self) -> str:
         result = self.name
         if self.extra:
             result += f'[{self.extra}]'
@@ -22,15 +22,15 @@ class PackageSpec:
             result += self.version
         return result
 
-    def versioned(self, value: str):
+    def versioned(self, value: str) -> 'PackageSpec':
         return PackageSpec(self.name, self.extra, value)
 
     @property
-    def unconstrained(self):
+    def unconstrained(self) -> bool:
         return self.version is None
 
     @staticmethod
-    def parse(value: str):
+    def parse(value: str) -> 'PackageSpec':
         value = value.strip().replace(' ', '')
 
         result = RE.fullmatch(value)

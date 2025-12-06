@@ -53,7 +53,7 @@ async def _main() -> None:
         rich.print(f'[blue]{interactor.dump_specs(packages)}')
 
 
-def main():
+def main() -> None:
     asyncio.run(_main())
 
 if __name__ == '__main__':

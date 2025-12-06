@@ -19,12 +19,12 @@ class PypiClient:
     def __init__(
             self,
             before_time: datetime,
-            on_done: Callable[[], None] = lambda: ()
+            on_done: Callable[[], None] = lambda: None
     ) -> None:
         self._before_time = before_time
         self._inner = AsyncClient()
-        self._mapping = {}
-        self._tasks: list[Awaitable] = []
+        self._mapping: dict[str, str] = {}
+        self._tasks: list[Awaitable[None]] = []
         self._on_done = on_done
 
     def _parse_response(self, resp: Response) -> Generator[_ParseResponseEntry]:

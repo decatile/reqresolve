@@ -3,6 +3,7 @@ import rich
 from .abc import AbstractInteractor
 from .pyproject import PyprojectInteractor
 from .requirements import RequirementsInteractor
+from .exception import InvalidSpecifierException, UnsupportedOperationException, MalformedSpecifiersException
 
 
 def for_filepath(filepath: str) -> AbstractInteractor:
@@ -14,3 +15,6 @@ def for_filepath(filepath: str) -> AbstractInteractor:
         return PyprojectInteractor(filepath)
     else:
         raise ValueError('Invalid file extension (.txt or .toml expected)')
+
+
+__all__ = ('for_filepath', 'InvalidSpecifierException', 'UnsupportedOperationException', 'MalformedSpecifiersException')
