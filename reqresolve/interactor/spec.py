@@ -20,6 +20,9 @@ class PackageSpec:
             result += self.version
         return result
 
+    def versioned(self, value: str):
+        return PackageSpec(self.name, self.extra, value)
+
     @property
     def unconstrained(self):
         return self.version is None

@@ -1,7 +1,7 @@
 import asyncio
 from dataclasses import dataclass
 from datetime import datetime
-from typing import Awaitable, Generator, Iterable
+from typing import Awaitable, Generator, Iterable, Callable
 
 import rich
 from httpx import AsyncClient, Response
@@ -16,11 +16,12 @@ class _ParseResponseEntry:
 
 
 class PypiClient:
-    def __init__(self, before_time: datetime) -> None:
+    def __init__(self, before_time: datetime, on_done: Callable[[], None]) -> None:
         self._before_time = before_time
         self._inner = AsyncClient()
         self._mapping = {}
         self._tasks: list[Awaitable] = []
+        self._on_done = on_done
 
     def _parse_response(self, resp: Response) -> Generator[_ParseResponseEntry]:
         obj = resp.json()
@@ -32,7 +33,6 @@ class PypiClient:
             yield _ParseResponseEntry(version, datetime.fromisoformat(upload_time))
 
     async def _task(self, package_name: str) -> None:
-        rich.print(f'[green]Requesting pypi to retrieve metadata for package {package_name}')
         resp = await self._inner.get(f'https://pypi.org/pypi/{package_name}/json')
 
         if resp.status_code == 404:
@@ -43,7 +43,8 @@ class PypiClient:
         for entry in self._parse_response(resp):
             if entry.time < self._before_time:
                 self._mapping[package_name] = entry.version
-                rich.print(f'[yellow]Found suitable version {entry.version} for package {package_name}')
+                rich.print(f'[green]Found suitable version {entry.version} for package {package_name}')
+                self._on_done()
                 return
 
         raise NoSuitableVersionException(package_name)

@@ -4,8 +4,8 @@ from argparse import ArgumentParser
 from pathlib import Path
 
 import rich
+from rich.progress import Progress
 
-from reqresolve.interactor.spec import PackageSpec
 from .git import find_newest_change
 from .interactor import for_filepath as interactor_for_filepath
 from .pypi import PypiClient
@@ -30,14 +30,21 @@ async def main() -> None:
     before_time = find_newest_change(args.root, args.file)
     interactor = interactor_for_filepath(fullpath)
     packages = interactor.load_specs()
-    mappings = await PypiClient(before_time).query_packages(pkg.name for pkg in packages if pkg.unconstrained)
+    unconstrained_packages = [pkg.name for pkg in packages if pkg.unconstrained]
 
-    if len(mappings) == 0:
+    if len(unconstrained_packages) == 0:
         rich.print('[yellow]Nothing to do')
         return
 
+    with Progress(transient=True) as p:
+        task = p.add_task('Working...', total=len(unconstrained_packages))
+        mappings = await PypiClient(
+            before_time,
+            lambda: p.update(task, advance=1)
+        ).query_packages(unconstrained_packages)
+
     packages = [
-        PackageSpec(i.name, i.extra, f'<={mappings[i.name]}') if i.unconstrained else i
+        i.versioned(f'<={mappings[i.name]}') if i.unconstrained else i
         for i in packages
     ]
     if not args.dry_run:

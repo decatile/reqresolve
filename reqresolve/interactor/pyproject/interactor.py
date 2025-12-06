@@ -21,7 +21,7 @@ class PyprojectInteractor(AbstractInteractor):
         with open(self._filepath, 'rb') as f:
             obj = tomllib.load(f)
             deps: list[str] = obj['project']['dependencies']
-            for lineno, dep in enumerate(deps, 1):
+            for dep in deps:
                 try:
                     result.append(PackageSpec.parse(dep))
                 except ValueError:
