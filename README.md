@@ -1,6 +1,6 @@
 # 📦 Pin Package Versions Based on Historical Requirements
 
-A lightweight CLI tool that analyzes the history of a `requirements.txt` file in a Git repository and generates a new version of it, pinning each package to the **exact version that was available at the time of its last change**.
+A lightweight CLI tool that analyzes the history of a `requirements.txt` or `pyproject.toml` file in a Git repository and generates a new version of it, pinning each package to the **exact version that was available at the time of its last change**.
 
 This is especially useful for:
 - Reproducing old builds from historical code.
@@ -31,6 +31,7 @@ numpy<=1.20.0
 |------|------------------------------------------------------------------|
 | `-r`, `--root` | Path to the Git repository root (default: `.`)                   |
 | `-f`, `--file` | Relative path to requirements file (default: `requirements.txt`) |
+| `-d`, `--dry-run` | Instead of writing to file, output to console                |
 
 ### Example
 

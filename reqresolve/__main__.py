@@ -6,9 +6,9 @@ from pathlib import Path
 import rich
 from rich.progress import Progress
 
-from .git import find_newest_change
-from .interactor import for_filepath as interactor_for_filepath
-from .pypi import PypiClient
+from reqresolve.git import find_newest_change
+from reqresolve.interactor import for_filepath as interactor_for_filepath
+from reqresolve.pypi import PypiClient
 
 
 async def main() -> None:
