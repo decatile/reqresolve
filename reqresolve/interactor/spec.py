@@ -2,8 +2,10 @@ import re
 
 from dataclasses import dataclass
 
-RE = re.compile(r'(?P<name>[a-z0-9_-]+)(\[(?P<extras>[a-z0-9_-]+(,[a-z0-9_-]+)*)])?(?P<version>(==|>=|<=).*)?',
-                re.IGNORECASE)
+RE = re.compile(
+    r'(?P<name>[a-z0-9_-]+)(\[(?P<extras>[a-z0-9_-]+(,[a-z0-9_-]+)*)])?(?P<version>(==|>=|<=|~=).*)?',
+    re.IGNORECASE
+)
 
 
 @dataclass
