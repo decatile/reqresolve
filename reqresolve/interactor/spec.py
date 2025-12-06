@@ -12,7 +12,7 @@ class PackageSpec:
     extra: str | None
     version: str | None
 
-    def stringify(self):
+    def __str__(self):
         result = self.name
         if self.extra:
             result += f'[{self.extra}]'

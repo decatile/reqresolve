@@ -30,5 +30,5 @@ class RequirementsInteractor(AbstractInteractor):
 
         with open(self._filepath, 'w+') as f:
             for spec in specs:
-                f.write(spec.stringify())
+                f.write(str(spec))
                 f.write('\n')
