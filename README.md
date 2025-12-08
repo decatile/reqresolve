@@ -25,26 +25,88 @@ numpy<=1.20.0
 
 ---
 
-### Options
+# CLI Usage
 
-| Flag | Description                                                      |
-|------|------------------------------------------------------------------|
-| `-r`, `--root` | Path to the Git repository root (default: `.`)                   |
-| `-f`, `--file` | Relative path to requirements file (default: `requirements.txt`) |
-| `-d`, `--dry-run` | Instead of writing to file, output to console                |
+The program provides two main modes of operation:
 
-### Example
+## 1. `query` Mode - Query Packages Without Reading Files
 
+Allows you to query package information directly from the command line.
+
+**Syntax:**
 ```bash
-reqresolve \
-  -r . \
-  -f requirements.txt
+reqresolve query <packages> -t <time>
 ```
 
+**Arguments:**
+- `packages` - One or more package names to query (required)
+- `-t`, `--time` - Time before which to query package versions (required)
+
+**Examples:**
+```bash
+# Using Unix timestamp
+reqresolve query numpy pandas -t 1640995200
+
+# Using ISO format date
+reqresolve query requests flask -t "2023-01-01T00:00:00"
+
+# Querying multiple packages
+reqresolve query django numpy tensorflow -t "2022-06-15"
+```
+
+**Time formats for `--time`:**
+- Unix timestamp (integer): `1640995200`
+- ISO 8601 format: `"2023-01-01T00:00:00"` or `"2023-01-01"`
+
+## 2. `file` Mode - Work with Dependency Files
+
+Analyzes and updates dependency files in a repository.
+
+**Syntax:**
+```bash
+reqresolve file [options]
+```
+
+**Arguments:**
+- `-r`, `--root` - Root directory of the repository (default: `.`)
+- `-f`, `--file` - Relative path to the requirements file (default: `requirements.txt`)
+- `-d`, `--dry-run` - Test mode, outputs results to console without writing to file
+
+**Examples:**
+```bash
+# Analyze the default requirements.txt file in the current directory
+reqresolve file
+```
 This will:
 - Analyze changes in `requirements.txt`
 - Backup to `requirements.txt.bak`
 - Generate a new file `requirements.txt` with pinned versions
+
+**Also...**
+
+```bash
+# Analyze a specific file in a given directory
+reqresolve file --root /path/to/project --file requirements/dev.txt
+
+# Test run to preview results
+reqresolve file --dry-run
+
+# Analyze an alternative dependency file
+reqresolve file --file pyproject.toml
+```
+
+## General Help
+
+To get help on available commands:
+```bash
+reqresolve --help
+```
+
+To get help on a specific command:
+```bash
+reqresolve query --help
+reqresolve file --help
+```
 
 ---
 
