@@ -1,19 +1,18 @@
 from argparse import ArgumentParser, Namespace
 from datetime import datetime, UTC
-from typing import cast, Callable
+
+import rich
 
 
-def datetime_action(value: str) -> datetime:
-    for strategy in (
-            lambda ts: datetime.fromtimestamp(int(ts), UTC),
-            lambda ts: datetime.fromisoformat(ts),
-    ):
-        # noinspection PyBroadException
-        try:
-            return cast(Callable[[str], datetime], strategy)(value)
-        except Exception:
-            ...
-    raise ValueError('Cannot convert into datetime: tried UTC timestamp and ISO format')
+# noinspection PyBroadException
+def datetime_like(value: str) -> datetime:
+    try:
+        num = int(value)
+        dt = datetime.fromtimestamp(num, UTC)
+        rich.print(f'[yellow]Parsed datetime: {dt}')
+        return dt
+    except:
+        return datetime.fromisoformat(value).astimezone(UTC)
 
 
 def parse() -> Namespace:
@@ -26,8 +25,8 @@ def parse() -> Namespace:
                               help='Package names to query')
     query_parser.add_argument('-t',
                               '--time',
-                              type=datetime_action,
-                              help='Time before which we query package versions (UTC | Unix)',
+                              type=datetime_like,
+                              help='Time before which we query package versions (ISO | Unix)',
                               required=True)
 
     file_parser = subparsers.add_parser('file', help='Query packages from selected file and write results into it')
