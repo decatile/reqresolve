@@ -1,5 +1,5 @@
 [project]
-name = "reqresolve"
+name = "bartender"
 version = "2.1.0"
 description = "Pin your dependencies according to commit date"
 requires-python = ">=3.13,<3.14"
@@ -11,7 +11,7 @@ dependencies = [
 ]
 
 [project.scripts]
-reqresolve = "reqresolve.__main__:main"
+bartender = "bartender.__main__:main"
 
 [tool.uv]
 package = true

@@ -17,5 +17,5 @@ def setup_logging(verbosity: int) -> None:
     L.setLevel(level)
 
 
-L = logging.Logger('reqresolve')
+L = logging.Logger('bartender')
 L.addHandler(RichHandler())

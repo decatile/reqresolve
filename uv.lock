@@ -342,7 +342,7 @@ wheels = [
 ]
 
 [[package]]
-name = "reqresolve"
+name = "bartender"
 version = "2.1.0"
 source = { editable = "." }
 dependencies = [

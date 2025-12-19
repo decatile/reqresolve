@@ -12,11 +12,11 @@ jobs:
         os: [ ubuntu-latest, windows-latest ]
         include:
           - os: ubuntu-latest
-            artifact_name: reqresolve-linux
-            asset_name: reqresolve-linux
+            artifact_name: bartender-linux
+            asset_name: bartender-linux
           - os: windows-latest
-            artifact_name: reqresolve-windows
-            asset_name: reqresolve-windows.exe
+            artifact_name: bartender-windows
+            asset_name: bartender-windows.exe
 
     runs-on: ${{ matrix.os }}
 
@@ -33,7 +33,7 @@ jobs:
         run: uv sync
 
       - name: Build Executable
-        run: uv run nuitka reqresolve --mode=onefile --output-dir=build --output-filename=${{ matrix.asset_name }} --assume-yes-for-downloads --include-module=cffi
+        run: uv run nuitka bartender --mode=onefile --output-dir=build --output-filename=${{ matrix.asset_name }} --assume-yes-for-downloads --include-module=cffi
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
@@ -67,9 +67,9 @@ jobs:
           prerelease: false
           generate_release_notes: true
           files: |
-            reqresolve-linux/reqresolve-linux
-            reqresolve-windows/reqresolve-windows.exe
-            reqresolve-macos/reqresolve-macos
+            bartender-linux/bartender-linux
+            bartender-windows/bartender-windows.exe
+            bartender-macos/bartender-macos
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

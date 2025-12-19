@@ -6,11 +6,11 @@ import rich
 import rich.logging
 from rich.progress import Progress
 
-from reqresolve import cli
-from reqresolve.git import find_newest_change
-from reqresolve.interactor import for_filepath as interactor_for_filepath
-from reqresolve.log import L, setup_logging
-from reqresolve.pypi import PypiClient
+from bartender import cli
+from bartender.git import find_newest_change
+from bartender.interactor import for_filepath as interactor_for_filepath
+from bartender.log import L, setup_logging
+from bartender.pypi import PypiClient
 
 
 async def _main() -> None:

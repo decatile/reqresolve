@@ -5,8 +5,8 @@ from typing import Awaitable, Generator, Iterable, Callable
 
 from httpx import AsyncClient, Response
 
-from reqresolve.log import L
-from reqresolve.pypi.exception import PackageNotFoundException, NoSuitableVersionException
+from bartender.log import L
+from bartender.pypi.exception import PackageNotFoundException, NoSuitableVersionException
 
 
 @dataclass

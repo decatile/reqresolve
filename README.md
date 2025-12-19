@@ -1,10 +1,10 @@
-# reqresolve
+# bartender
 
 A lightweight CLI tool for pinning package versions based on historical requirements in Git repositories.
 
 ## What It Does
 
-reqresolve analyzes the history of your requirements.txt or pyproject.toml file and generates a new version with each
+bartender analyzes the history of your requirements.txt or pyproject.toml file and generates a new version with each
 package pinned to the exact version that was available at the time of
 its last change. This is especially useful for:
 
@@ -27,7 +27,7 @@ its last change. This is especially useful for:
 Query package information directly from the command line without reading files:
 
 ```bash
-reqresolve query <packages> -t <time>
+bartender query <packages> -t <time>
 ```
 
 Arguments:
@@ -39,13 +39,13 @@ Examples:
 
 ```bash
 # Using Unix timestamp
-reqresolve query numpy pandas -t 1640995200
+bartender query numpy pandas -t 1640995200
 
 # Using ISO format date
-reqresolve query requests flask -t "2023-01-01T00:00:00"
+bartender query requests flask -t "2023-01-01T00:00:00"
 
 # Querying multiple packages
-reqresolve query django numpy tensorflow -t "2022-06-15"
+bartender query django numpy tensorflow -t "2022-06-15"
 ```
 
 ### File Mode - Work with Dependency Files
@@ -53,7 +53,7 @@ reqresolve query django numpy tensorflow -t "2022-06-15"
 Analyzes and updates dependency files in a repository:
 
 ```bash
-reqresolve file [options]
+bartender file [options]
 ```
 
 Arguments:
@@ -66,16 +66,16 @@ Examples:
 
 ```bash
 # Analyze the default requirements.txt file in the current directory
-reqresolve file
+bartender file
 
 # Analyze a specific file in a given directory
-reqresolve file --root /path/to/project --file requirements/dev.txt
+bartender file --root /path/to/project --file requirements/dev.txt
 
 # Test run to preview results
-reqresolve file --dry-run
+bartender file --dry-run
 
 # Analyze an alternative dependency file
-reqresolve file --file pyproject.toml
+bartender file --file pyproject.toml
 ```
 
 File Format Support
@@ -117,8 +117,8 @@ It correctly parses:
 ### Install from source:
 
 ```bash
-git clone https://github.com/decatile/reqresolve.git
-cd reqresolve
+git clone https://github.com/decatile/bartender.git
+cd bartender
 pip install -e .
 ```
 

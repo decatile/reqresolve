@@ -1,8 +1,8 @@
 from datetime import datetime, UTC
 
 import pytest
-from reqresolve.pypi.client import PypiClient
-from reqresolve.pypi.exception import NoSuitableVersionException, PackageNotFoundException
+from bartender.pypi.client import PypiClient
+from bartender.pypi.exception import NoSuitableVersionException, PackageNotFoundException
 
 
 @pytest.mark.asyncio

@@ -4,7 +4,7 @@ from typing import cast
 
 from pygit2 import Repository, Commit
 
-from reqresolve.log import L
+from bartender.log import L
 
 
 def find_newest_change(repository_root: str, relative_filepath: str) -> datetime:

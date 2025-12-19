@@ -2,10 +2,10 @@ import os
 from io import StringIO
 from typing import TextIO
 
-from reqresolve.interactor.abc import AbstractInteractor
-from reqresolve.interactor.exception import InvalidSpecifierException, MalformedSpecifiersException
-from reqresolve.interactor.spec import PackageSpec
-from reqresolve.log import L
+from bartender.interactor.abc import AbstractInteractor
+from bartender.interactor.exception import InvalidSpecifierException, MalformedSpecifiersException
+from bartender.interactor.spec import PackageSpec
+from bartender.log import L
 
 
 class RequirementsInteractor(AbstractInteractor):

@@ -2,15 +2,15 @@ import tomllib
 from io import StringIO
 from typing import Never
 
-from reqresolve.interactor.abc import AbstractInteractor
-from reqresolve.interactor.exception import (
+from bartender.interactor.abc import AbstractInteractor
+from bartender.interactor.exception import (
     InvalidSpecifierException,
     MalformedSpecifiersException,
     UnsupportedOperationException
 )
-from reqresolve.interactor.pyproject.model import FileModel
-from reqresolve.interactor.spec import PackageSpec
-from reqresolve.log import L
+from bartender.interactor.pyproject.model import FileModel
+from bartender.interactor.spec import PackageSpec
+from bartender.log import L
 
 
 class PyprojectInteractor(AbstractInteractor):

@@ -3,7 +3,7 @@ __pycache__
 .idea
 dist
 build
-reqresolve.egg-info
+bartender.egg-info
 
 # nuitka
-reqresolve.*/
+bartender.*/
